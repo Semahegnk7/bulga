@@ -1,0 +1,7 @@
+.top-card{
+    display: flex;
+    justify-content: space-between;
+}
+mat-card{    
+    margin: 1rem;
+}

@@ -1,0 +1,252 @@
+<app-header></app-header>
+<section class="content container-fluid">
+    <mat-card>
+        <mat-card-content class="top-card">
+            <button mat-raised-button>Job Seeker Registration </button>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-horizontal-stepper animationDuration="1000" [linear]="false">
+            <form [formGroup]="registrationForm">
+                <mat-step label="Basic Information">
+                    <mat-card-content formGroupName="basicInformation">
+                        <div class="form-row">
+                            <mat-form-field appearance="fill">
+                                <mat-label>First Name</mat-label>
+                                <input matInput placeholder="enter first name" formControlName="firstName">
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Middle Name</mat-label>
+                                <input matInput placeholder="enter middleName" formControlName="middleName">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Last Name</mat-label>
+                                <input matInput placeholder="enter last name" formControlName="lastName">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Email</mat-label>
+                                <input type="email" matInput placeholder="enter email" formControlName="userName">
+                                <div *ngIf="registrationForm.get('basicInformation.userName').hasError('pattern') && registrationForm.get('basicInformation.userName').touched">
+                                    Please enter a valid email address.
+                                  </div>
+                            </mat-form-field>
+                            
+                            <mat-form-field appearance="fill">
+                                <mat-label>Phone</mat-label>
+                                <input type="number" matInput placeholder="enter phone" formControlName="phone">
+                                <div
+                                    *ngIf="registrationForm.get('basicInformation.phone').hasError('pattern') && registrationForm.get('basicInformation.phone').touched">
+                                    Please enter a valid phone number.
+                                </div>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                                <mat-label>Education Level</mat-label>
+                                <mat-select formControlName="educationalLevel">
+                                    <mat-option value="Illiterate" title="ማንብብና መጽሀፍ የማይችል">Illiterate</mat-option>
+                                    <mat-option value="Traditional School" title="መሰረተ ትምህርት">Traditional
+                                        School</mat-option>
+                                    <mat-option value="1-8">1-8</mat-option>
+                                    <mat-option value="9-10">9-10</mat-option>
+                                    <mat-option value="11-12">11-12</mat-option>
+                                    <mat-option value="10+1" title="ደረጃ 1 እና 2">10+1</mat-option>
+                                    <mat-option value="10+2" title="ደረጃ 3">10+2</mat-option>
+                                    <mat-option value="10+3" title="ደረጃ 4 እና ዲፕሎማ">10+3</mat-option>
+                                    <mat-option value="Level5">level 5</mat-option>
+                                    <mat-option value="Degree">Degree</mat-option>
+                                    <mat-option value="Master">Masters</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>graduated Date</mat-label>
+                                <input matInput [matDatepicker]="pickerGraduated" placeholder="graduated date" title="use GC date format"
+                                    formControlName="graduatedDate" (dateChange)="onDateOfBirthChange($event,'graduatedDate')">
+                                <mat-datepicker-toggle matIconSuffix [for]="pickerGraduated">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerGraduated>
+
+                                </mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                                <mat-label>Name of Institution</mat-label>
+                                <input matInput placeholder="eg ሸኖ ፣ አሌልቱ ፣ ኮረማሽ" formControlName="graduatedAt">
+
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Department</mat-label>
+                                <input matInput placeholder="eg ነርስ ፣ ሹፌር ፣ ፈርኒቸር" formControlName="department">
+
+                            </mat-form-field>
+
+                        </div>
+                    </mat-card-content>
+                    <mat-card-content formGroupName="basicInformation">
+                        <div class="form-row">
+
+                            <mat-form-field appearance="fill">
+                                <mat-label>Kebele</mat-label>
+                                <mat-select formControlName="kebeleName" (valueChange)="setKebele($event)">
+                                    <mat-option value="1">Kebele 01</mat-option>
+                                    <mat-option value="2">02</mat-option>
+                                    <mat-option value="3">03</mat-option>
+                                    <mat-option value="4">04</mat-option>
+                                    <mat-option value="5">05</mat-option>
+
+                                </mat-select>
+                                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint> -->
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Goth (ጎጥ)</mat-label>
+                                <mat-select formControlName="gothName">
+                                    <mat-option value="1">ጎጥ 1</mat-option>
+                                    <mat-option value="2">ጎጥ 2</mat-option>
+                                    <mat-option value="3">ጎጥ 3</mat-option>
+                                    <mat-option value="4">ጎጥ 4</mat-option>
+                                    <mat-option value="5">ጎጥ 5</mat-option>
+                                    <mat-option value="6">ጎጥ 6</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Date Of Birth</mat-label>
+                                <input matInput [matDatepicker]="pickerDateOfBirth" placeholder="date of birth"
+                                formControlName="dateOfBirth" (dateChange)="onDateOfBirthChange($event,'dateOfBirth')" title="use GC date format">
+                            <mat-datepicker-toggle matIconSuffix [for]="pickerDateOfBirth">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #pickerDateOfBirth>
+
+                            </mat-datepicker>
+                            </mat-form-field>
+
+                        </div>
+                    </mat-card-content>
+
+                    <button mat-raised-button color="primary" matStepperNext>Next</button>
+                </mat-step>
+
+
+                <mat-step label="Additional Information">
+                    <mat-card-content formGroupName="additionalInformation">
+                        <div class="row">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Experience</mat-label>
+                                <input type="number" matInput placeholder="enter experience"
+                                    formControlName="experience">
+
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" class="skill">
+                                <mat-label>Skill</mat-label>
+                                <input matInput placeholder="enter your skills" formControlName="description">
+
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-checkbox class="col-md" value="Disabled" title="የአካል ጉዳተኛ"
+                                formControlName="isDisabled">Disabled</mat-checkbox>
+                            <mat-checkbox class="col-md" value="Return From Arab" title="ከአረብ የተመለሰ"
+                                formControlName="returnFromArab">Return From Arab</mat-checkbox>
+                            <mat-checkbox class="col-md" value="House Wife" title="የቤት እመቤት"
+                                formControlName="houseWife">House Wife</mat-checkbox>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="form-label">Attach Letter</label>&nbsp;&nbsp;
+                                <input type="file" #seekerFile name="seekerFile" id="seekerFile" class="form-control" placeholder="attach your jobSeeker letter"
+                                    (change)="onSelectFile($event)">
+
+                            </div>
+
+                            <span class="gender">
+                                <mat-label><strong>Gender:</strong></mat-label>
+                                <mat-radio-group formControlName="gender" matInput>
+                                    <mat-radio-button value="Male">Male</mat-radio-button>
+                                    <mat-radio-button value="Female">Female</mat-radio-button>
+                                </mat-radio-group>
+                            </span>
+                        </div>
+                    </mat-card-content>
+
+                    <button mat-raised-button color="primary" matStepperPrevious>Back</button> |
+                    <button mat-raised-button color="primary" *ngIf="!submit"(click)="RegisterJobSeeker()">Submit</button>
+                    <button mat-raised-button color="primary" disabled *ngIf="submit">Submitting...</button>
+                </mat-step>
+
+            </form>
+        </mat-horizontal-stepper>
+    </mat-card>
+    <div class="modal fade" id="detailModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Job Seeker Details</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body" *ngIf="jobSeeker">
+                    <div class="row mt-3">
+                        <div class="col-md">
+                            first Name: {{jobSeeker.firstName}}
+                        </div>
+                        <div class="col-md">
+                            Middle Name: {{jobSeeker.middleName}}
+                        </div>
+                        <div class="col-md">
+                            Last Name: {{jobSeeker.lastName}}
+                        </div>
+
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md">
+                            Gender: {{jobSeeker.gender}}
+                        </div>
+                        <div class="col-md">
+                            Age: {{jobSeeker.dateOfBirth}}
+                        </div>
+                        <div class="col-md">
+                            Educational Level: {{jobSeeker.educationalLevel}}
+                        </div>
+
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md">
+                            Graduated Date : {{jobSeeker.graduatedDate | date:'shortDate'}}
+                        </div>
+                        <div class="col-md">
+                            Graduated Institution: {{jobSeeker.graduatedAt}}
+                        </div>
+                        <div class="col-md">
+                            Kebele: {{jobSeeker.kebeleName}}
+                        </div>
+
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md">
+                            Goth: {{jobSeeker.gothName}}
+                        </div>
+                        <div class="col-md">
+                            Phone: {{jobSeeker.phone}}
+                        </div>
+                        <div class="col-md">
+                            Status: {{jobSeeker.employeeStatus}}
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</section>
+<app-footer></app-footer>

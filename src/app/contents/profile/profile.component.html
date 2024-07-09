@@ -1,0 +1,164 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+
+        <div class="card card-primary card-outline">
+          <div class="card-body box-profile">
+            <div class="text-center">
+              <i class="fa fas fa-user-circle img-circle img-bordered-sm" style="font-size: 160px;"
+                alt="user image"></i>
+
+            </div>
+            <h3 class="profile-username text-center" *ngIf="userData">{{userData.firstName}} {{userData.middleName}}
+            </h3>
+            <p class="text-muted text-center" *ngIf="userData">{{userData.role}}</p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-header p-2">
+            <ul class="nav nav-pills">
+              <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">User Profile</a></li>
+              <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Change Password</a></li>
+              <li class="nav-item" *ngIf="role==='ADMIN'" ><a class="nav-link" href="#resetPassword" data-toggle="tab">Reset Password</a></li>
+            </ul>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="active tab-pane" id="activity">
+
+                <div class="post">
+
+
+                  <br>
+                  <strong style="font-size: 18px;padding:5px 10px;">Address:</strong><span style="font-size: 18px;"
+                    *ngIf="userData">{{userData.address}}</span><br /><br />
+                  <strong style="font-size: 18px;padding:5px 10px;">Department:</strong><span style="font-size: 18px;"
+                    *ngIf="userData">{{userData.department}}</span><br /><br />
+                  <strong style="font-size: 18px;padding:5px 10px;">Phone Number:</strong><span style="font-size: 18px;"
+                    *ngIf="userData">{{userData.phone}}</span><br /><br />
+                    <strong style="font-size: 18px;padding:5px 10px;">User Name:</strong><span style="font-size: 18px;"
+                    *ngIf="userData">{{userData.userName}}</span><br /><br />
+
+                </div>
+
+
+
+
+
+
+              </div>
+
+              <div class="tab-pane" id="settings">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <form [formGroup]="loginForm">
+                      <div class="row mb-3">
+                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                        <div class="col-md-8 col-lg-9">
+                          <input class="form-control" formControlName="password" required pattern=".{6,}"
+                            type="password" placeholder="Enter current password">
+                          <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+                            <p class="text-danger" style="font-size:11px;">
+                              Current Passowrd can not be Null</p>
+
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <form [formGroup]="changePasswordForm">
+                      <div class="row mb-3">
+                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                        <div class="col-md-8 col-lg-9">
+                          <input class="form-control" formControlName="newPassword" required pattern=".{6,}"
+                            type="password" placeholder="Enter new password" (keyup)="checkPassword()">
+                          <div
+                            *ngIf="changePasswordForm.controls['newPassword'].invalid && changePasswordForm.controls['newPassword'].touched">
+                            <p class="text-danger" style="font-size:11px;">
+                              Passowrd Should Be 6 or more Characters</p>
+
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Confirm Password</label>
+                        <div class="col-md-8 col-lg-9">
+                          <input class="form-control" required pattern=".{6,}" formControlName="confirmPassword"
+                            type="password" placeholder="Confirm new password" (keyup)="checkPassword()">
+                          <div *ngIf="passworderror">
+                            <p class="text-danger" style="font-size:11px;">
+                              Password didn't Match!!</p>
+
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="text-center">
+                      <button class="btn btn-primary" (click)="changePassword(changePasswordForm)">Change
+                        Password</button>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <p class="mb-2">Password requirements</p>
+                    <p class="small text-muted mb-2">To create a new password, you have to meet all of the following
+                      requirements:</p>
+                    <ul class="small text-muted pl-4 mb-0">
+                      <li>Minimum 6 character</li>
+                      <li>At least one special character</li>
+                      <li>At least one number</li>
+                      <li>Can’t be the same as a previous password</li>
+                    </ul>
+                  </div>
+
+
+                </div>
+              </div>
+
+              <div class="tab-pane" id="resetPassword">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <form [formGroup]="resetPassword">
+                      <div class="row mb-3">
+                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">User Name</label>
+                        <div class="col-md-8 col-lg-9">
+                          <input class="form-control" formControlName="userName" required pattern=".{6,}"
+                            type="text" placeholder="Enter user name">
+                         
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Password</label>
+                        <div class="col-md-8 col-lg-9">
+                          <input class="form-control" formControlName="password" required pattern=".{6,}"
+                            type="password" placeholder="Enter password">
+                         
+                        </div>
+                      </div>
+                    </form>
+                   <div class="text-center">
+                      <button class="btn btn-primary" (click)="restPasswordFunc()">Reset Password</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

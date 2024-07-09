@@ -1,0 +1,105 @@
+<section class="content container-fluid">
+    <mat-card>
+            <mat-card-content class="top-card">
+                <button mat-raised-button *ngIf="!update">Add User Form </button>
+                <button mat-raised-button *ngIf="update">Update User Form </button>
+            </mat-card-content>
+        
+    </mat-card>
+    <mat-card>
+        <mat-horizontal-stepper animationDuration="1000" [linear]="false">
+            <form [formGroup]="registrationForm">
+                <mat-step label="Basic Information">
+                    <mat-card-content>
+                        <div class="form-row">
+                            <mat-form-field appearance="fill">
+                                <mat-label>First Name</mat-label>
+                                <input matInput placeholder="enter first name" formControlName="firstName">
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Middle Name</mat-label>
+                                <input matInput placeholder="enter middleName" formControlName="middleName">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Last Name</mat-label>
+                                <input matInput placeholder="enter last name" formControlName="lastName">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Email</mat-label>
+                                <input matInput placeholder="enter User Name" formControlName="userName">
+                                <div
+                                    *ngIf="registrationForm.get('userName').hasError('pattern') && registrationForm.get('userName').touched">
+                                    Please enter a valid email address.
+                                </div>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" *ngIf="!update">
+                                <mat-label>Password</mat-label>
+                                <input type="password" matInput placeholder="enter phone" formControlName="password">
+                                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint> -->
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                                <mat-label>Address</mat-label>
+                                <input matInput placeholder="enter address"
+                                    formControlName="address">
+
+                                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint> -->
+                            </mat-form-field>
+                        
+
+                            <mat-form-field appearance="fill">
+                                <mat-label>Phone</mat-label>
+                                <input type="tel" matInput placeholder="enter phone" formControlName="phone">
+                                <div
+                                    *ngIf="registrationForm.get('phone').hasError('pattern') && registrationForm.get('phone').touched">
+                                    Please enter a valid phone number.
+                                </div>
+
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Department</mat-label>
+                                <input matInput placeholder="enter department" formControlName="department">
+
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Position</mat-label>
+                                <mat-select formControlName="role">
+                                    <mat-option title="የስራ እድል ፈጠራ" value="PROCESS_EXPERT">PROCESS_EXPERT</mat-option>
+                                    <mat-option title="ትምህርትና ስልጠና" value="EDUCATION_AND_TRAINING">EDUCATION_AND_TRAINING</mat-option>
+                                    <mat-option title="ኢንዱስትሪ ኢክስቴንሽን" value="INDUSTRY_EXTENSION">INDUSTRY_EXTENSION</mat-option>
+                                    <mat-option title="ገበያ ዝግጅት" value="MARKET_PREPARATION">MARKET_PREPARATION</mat-option>
+                                    <mat-option title="እቅድ ዝግጅት" value="PLANNING">PLANNING</mat-option>
+                                    <mat-option title="የተቋም አቅም ግንባታ" value="CAPACITY_BUILDING">CAPACITY_BUILDING</mat-option>
+                                    <mat-option title="ስራና ስምሪት" value="WORK_AND_DEPLOYMENT">WORK_AND_DEPLOYMENT</mat-option>
+                                </mat-select>
+
+
+                            </mat-form-field>
+                            <span class="gender">
+                                <mat-label><strong>Gender:</strong></mat-label>
+                                <mat-radio-group formControlName="gender" matInput>
+                                    <mat-radio-button value="Male">Male</mat-radio-button>
+                                    <mat-radio-button value="Female">Female</mat-radio-button>
+                                </mat-radio-group>
+                            </span>
+                            
+                        </div>
+                    </mat-card-content>
+                    
+
+                    <button mat-raised-button color="primary"*ngIf="!update" (click)="RegisterJobSeeker()">Submit</button>
+                    <button mat-raised-button color="primary" *ngIf="update" (click)="updateUser()">update</button>
+                </mat-step>
+
+                
+               
+                
+            </form>
+        </mat-horizontal-stepper>
+    </mat-card>
+
+
+</section>

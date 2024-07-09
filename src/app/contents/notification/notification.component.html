@@ -1,0 +1,43 @@
+<section class="content container-fluid">
+    <mat-card>
+    <mat-card-content class="top-card">
+        <button mat-raised-button >Notifications</button> 
+        <button mat-raised-button [routerLink]="['/dash','pushnotification']">Push Notification <i class="fa fas fa-plus"></i></button> 
+      </mat-card-content>
+    </mat-card>
+<mat-card *ngIf="rowData && rowData.length == 0">
+    <mat-card-header class="bg-secondary" style="padding: 25px 30px;font-size: 20px;">
+        Sorry, Currently You have no Notifications Thank you!
+    </mat-card-header>
+</mat-card>
+<mat-card *ngIf="rowData && rowData.length > 0">
+<div class="input-group rounded">
+    <input title="Filter Notification by using subject,  sender  and date like-2024-02-12 ... " class="form-control rounded" placeholder="Search" aria-label="Search"
+      aria-describedby="search-addon" (keyup)="filterData($event)" />
+    <span class="input-group-text border-0" id="search-addon">
+      <i class="fas fa-search"></i>
+    </span>
+  </div>
+</mat-card>
+<mat-card *ngFor="let notify of notification">
+
+    <div class="row">
+        <div class="col-md-1 bg-{{notify.type}} text-center ">
+            <i class="fa far fa-bell" style="font-size: 26px;margin-top: 60%;"></i>
+        </div>
+        <div class="col-md-11">
+            <span *ngIf="notify.status == 1"><i class="fa fas fa-check-double text-success" style="float: right;padding: 5px 10px;font-size: 26px;"></i></span>
+            <mat-card-content class="text-bold">{{notify.subject}}</mat-card-content>
+            <mat-card-content style="padding: 10px 15px;">{{notify.content}}</mat-card-content>
+            <mat-card-content>{{notify.timestamp}}</mat-card-content>
+            <mat-card-content *ngIf="notify.attachement" >Attachment - <a class="text-bold" href="assets/notification/{{notify.attachement}}">Download/View</a> </mat-card-content>
+            <mat-card-content *ngIf="notify.senderId" >Sent From - <span class="text-bold">{{notify.senderId}}</span> </mat-card-content>
+            <div class="modal-footer" style="padding: 5px 10px;">
+                <button class="btn btn-success col-md-1" *ngIf="notify.status == 0" (click)="markAsRead(notify.id)">Read</button>
+                <button class="btn btn-danger col-md-1" (click)="deleteNotification(notify.id)">Delete</button>
+             
+        </div>
+    </div>
+   </div>
+  </mat-card>
+</section>

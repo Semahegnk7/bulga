@@ -1,0 +1,25 @@
+<section class="content container-fluid">
+    <mat-card>
+        <mat-card-content class="top-card">
+          <button mat-raised-button>System Settings</button>
+          
+        </mat-card-content>
+      </mat-card>
+      
+        
+        <mat-slide-toggle (change)="onSlideToggleChange($event)" [checked]="publicReg">Public JobSeeker Registration {{publicReg}}</mat-slide-toggle>
+        <div class="container" style="display: none;">
+          <div class="row">
+            <div class="item ">
+              <div class="">
+                <img src="assets/cameraImages/back.jpg" alt="" class="w-100" style="height: 27rem;">
+                <h1 class=""><input type="text" value="This is the land found on here" style="width: 100%;"></h1>
+                <h2><input type="text" value="we must protect nature as us" style="width: 100%;"> </h2>
+                <button mat-raised-button color="primary">update</button>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      
+</section>

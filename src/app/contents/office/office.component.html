@@ -1,0 +1,224 @@
+<section class="content container-fluid">
+    <mat-card>
+        <mat-card-content class="top-card">
+            <button mat-raised-button>Company Maintenance</button> 
+
+            <button mat-raised-button  data-bs-toggle="modal" data-bs-target="#office-add-modal"
+            (click)="addNew()"
+            
+            >New</button>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+        </mat-form-field>
+      </mat-card>
+    
+    <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" matSort>
+    
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+                <mat-cell *matCellDef="let element;let i=index"> {{i+1}} </mat-cell>
+            </ng-container>
+    
+            <ng-container matColumnDef="kebeleName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Woreda Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.officeName}} </mat-cell>
+            </ng-container>
+            
+    
+            <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="parent">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Parent </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.parent}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-button color="accent" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="setId(element.id,'office')"><mat-icon>delete</mat-icon></button>|
+                    <button (click)="setEditId(element.id)"data-bs-toggle="modal" data-bs-target="#office-add-modal" mat-button
+                        color="primary"><mat-icon  >edit</mat-icon></button> 
+                        <button (click)="getSubofficeInfo(element.id)"data-bs-toggle="modal" data-bs-target="#sub-office-details-modal" mat-button
+                        color="primary">Office</button> 
+                    </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10, 50, 100]" aria-label="Select page" showFirstLastButtons>
+        </mat-paginator>
+    </div>
+    </section>
+    <div class="modal fade mt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+                <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-exclamation-triangle" style="font-size: 40px; color: red;"></i>
+                    <h4 class="mt-2">Confirmation!</h4>
+                    <p class="mt-3">Are You Sure?</p>
+                    <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" *ngIf="officeDelete" class="btn btn-danger" (click)="deleteDept()" data-bs-dismiss="modal" >Continue</button>
+                    <button type="button" *ngIf="!officeDelete" class="btn btn-danger" (click)="deleteOfficeDept()" data-bs-dismiss="modal" >Continue</button>
+                </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="office-add-modal">
+       
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Woreda add form</h4>
+              <button type="button" class="btn-close" id="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+      
+            <!-- Modal body -->
+            <div class="modal-body">
+             
+             <div class="row">
+                <form [formGroup]="officeForm">
+                    <div class="card-body">
+                    <div class="form-group">
+                    <label for="exampleInputEmail1">Woreda Name</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder=" name" formControlName="officeName">
+                    </div>
+                    <div class="form-group">
+                        <label>description</label>
+                        <textarea class="form-control" rows="3" placeholder="Enter description" formControlName="description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Office Parent</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder=" name" formControlName="parent">
+                            </div> 
+                    </div>
+                    </form>
+             </div>   
+        
+      
+      
+              
+            </div>
+      
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="submit" *ngIf="!update"class="btn btn-primary" (click)="saveOffice()">Submit</button>
+                    <button type="submit" *ngIf="update" class="btn btn-primary" (click)="updateOffice()">Update</button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal fade" id="sub-office-add-modal">
+       
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Office add form</h4>
+              <button type="button" class="btn-close" id="btn-close-sub" data-bs-dismiss="modal"></button>
+            </div>
+      
+            <!-- Modal body -->
+            <div class="modal-body">
+             
+             <div class="row">
+                <form [formGroup]="subOfficeForm">
+                    <div class="card-body">
+                    <div class="form-group">
+                    <label for="exampleInputEmail1">Office Name</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder=" name" formControlName="officeName">
+                    </div>
+                    <div class="form-group">
+                        <label>description</label>
+                        <textarea class="form-control" rows="3" placeholder="Enter description" formControlName="description"></textarea>
+                        </div>
+                    </div>
+                    </form>
+             </div>   
+        
+      
+      
+              
+            </div>
+      
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="submit" *ngIf="!update"class="btn btn-primary" (click)="saveSubOffice()">Submit</button>
+                    <button type="submit" *ngIf="update" class="btn btn-primary" (click)="updateSubOffice()">Update</button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal fade" id="sub-office-details-modal">
+       
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <button mat-raised-button  data-bs-toggle="modal" data-bs-target="#sub-office-add-modal"
+              (click)="addNew()"
+              >New</button>
+              <button type="button" class="btn-close" id="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+      
+            <!-- Modal body -->
+            <div class="modal-body">
+                <h4 class="modal-title">Sub Offices</h4>
+             <div class="row">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Office Name</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let office of subOfficeData">
+                        <td>{{office.officeName}}</td>
+                        <td>{{office.description}}</td>
+                        <td>
+                            <button mat-button color="accent" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="setId(office.id,'suboffice')"><mat-icon>delete</mat-icon></button>|
+                          <button (click)="setSubOfficeEditId(office.id)"data-bs-toggle="modal" data-bs-target="#sub-office-add-modal" mat-button
+                        color="primary"><mat-icon  >edit</mat-icon></button> 
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+             </div>   
+        
+      
+      
+              
+            </div>
+      
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+     

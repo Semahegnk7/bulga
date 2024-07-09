@@ -1,0 +1,415 @@
+<div class="container-fluid">
+    <div class="user" *ngIf="role!=='ADMIN'">
+    <div class="row mt-5">
+        <div class="col-lg-3 col-md">
+            <div class="small-box bg-primary text-white" >
+                <div class="inner">
+                    <h3 *ngIf="jobSeekers">{{jobSeekers.length}}<sup style="font-size: 20px"></sup></h3>
+                    <p>Total Job Seekers</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a class="small-box-footer" [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3 *ngIf="trained">{{trained.length}}</h3>
+                    <p>Trained Job Seeker</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a *ngIf="!permit"class="small-box-footer"  [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a *ngIf="permit" class="small-box-footer" [ngClass]="{active:url==='/trainedSeekers'}" [routerLink]="['/dash/trainedSeekers']"
+               (click)="changeUrl('/dash/trainedSeekers')">More info <i class="fas fa-arrow-circle-right"></i></a>
+                
+            </div>
+        </div>
+        <div class="col-lg-3 col-md">
+            <div class="small-box bg-success text-white">
+                <div class="inner">
+                    <h3 *ngIf="hired">{{hired.length}}</h3>
+                    <p>Hired</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <a *ngIf="!permit"class="small-box-footer"  [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a *ngIf="permit" class="small-box-footer" [ngClass]="{active:url==='/hiredSeekers'}" [routerLink]="['/dash/hiredSeekers']"
+               (click)="changeUrl('/dash/hiredSeekers')">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md">
+
+            <div class="small-box bg-secondary">
+                <div class="inner">
+                    <h3 *ngIf="pendingJobSeekers">{{pendingJobSeekers.length}}</h3>
+                    <p>Total Pending Seekers</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+                <a *ngIf="!permit"class="small-box-footer"  [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+             <a *ngIf="permit" class="small-box-footer" [ngClass]="{active:url==='/jobSeekers'}" [routerLink]="['/dash/jobSeekers']"
+            (click)="changeUrl('/dash/jobSeekers')">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        
+</div>
+</div>
+<div class="row mt-3" *ngIf="role==='ADMIN'">
+    <div class="col-md">
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3 *ngIf="sysUsers">{{sysUsers.length}}<sup style="font-size: 20px"></sup></h3>
+                <p>System Users</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+            <a class="small-box-footer" [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+            
+        </div>
+    </div>
+
+    <div class="col-md">
+        <div class="small-box bg-primary">
+            <div class="inner">
+                <h3 *ngIf="admins">{{admins.length}}</h3>
+                <p>Administrator</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a *ngIf="role!='ADMIN'"class="small-box-footer"  [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+             <a *ngIf="role==='ADMIN'" class="small-box-footer" [ngClass]="{active:url==='/admins'}" [routerLink]="['/dash/admins']"
+            (click)="changeUrl('/dash/admins')">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3 *ngIf="sirHidet">{{sirHidet.length}}</h3>
+                <p>Sira Edil Fetera</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            <a *ngIf="role!='ADMIN'"class="small-box-footer"  [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+             <a *ngIf="role==='ADMIN'" class="small-box-footer" [ngClass]="{active:url==='/siraHidetOfficers'}" [routerLink]="['/dash/siraHidetOfficers']"
+            (click)="changeUrl('/dash/siraHidetOfficers')">More info <i class="fas fa-arrow-circle-right"></i></a>
+            
+        </div>
+    </div>
+
+    <div class="col-md">
+
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3 *ngIf="woredaCoordinator">{{woredaCoordinator.length}}</h3>
+                <p title="Woreda Coordinators">W/Coordinator</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+            <a *ngIf="role!='ADMIN'"class="small-box-footer"  [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a *ngIf="role==='ADMIN'" class="small-box-footer" [ngClass]="{active:url==='/woredaCoordinators'}" [routerLink]="['/dash/woredaCoordinators']"
+           (click)="changeUrl('/dash/woredaCoordinators')">More info <i class="fas fa-arrow-circle-right"></i></a>
+           
+        </div>
+    </div>
+    
+    <div class="col-md">
+
+        <div class="small-box bg-dark">
+            <div class="inner">
+                <h3 *ngIf="industryExtensionCount">{{industryExtensionCount}}</h3>
+                <p>Industry Extension</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+            <a *ngIf="role!='ADMIN'"class="small-box-footer"  [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a *ngIf="role==='ADMIN'" class="small-box-footer" [ngClass]="{active:url==='/woredaCoordinators'}" [routerLink]="['/dash/woredaCoordinators']"
+           (click)="changeUrl('/dash/woredaCoordinators')">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div> 
+    </div>
+   
+    <div class="col-md">
+
+        <div class="small-box bg-secondary">
+            <div class="inner">
+                <h3 *ngIf="mayer">{{mayer.length}}</h3>
+                <p>Mayer(ከንቲባ)</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+            <a *ngIf="role!='ADMIN'"class="small-box-footer"  [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a *ngIf="role==='ADMIN'" class="small-box-footer" [ngClass]="{active:url==='/mayers'}" [routerLink]="['/dash/mayers']"
+           (click)="changeUrl('/dash/mayers')">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-md">
+
+        <div class="small-box bg-secondary">
+            <div class="inner">
+                <h3 *ngIf="zonalUsers">{{zonalCount}}</h3>
+                <p>Zonal Users</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+            <a *ngIf="role!='ADMIN'"class="small-box-footer"  [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a *ngIf="role==='ADMIN'" class="small-box-footer" [ngClass]="{active:url==='/zonalUsers'}" [routerLink]="['/dash/zonalUsers']"
+           (click)="changeUrl('/dash/zonalUsers')">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+</div>
+<div class="row mt-3" *ngIf="role==='ADMIN'">
+    <div class="col-md">
+        <div class="small-box bg-primary">
+            <div class="inner">
+                <h3 *ngIf="marketAndPreparation">{{marketAndPreparation}}</h3>
+                <p>Market Preparation</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a *ngIf="role!='ADMIN'"class="small-box-footer"  [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+             <a *ngIf="role==='ADMIN'" class="small-box-footer" [ngClass]="{active:url==='/marketPreparations'}" [routerLink]="['/dash/marketPreparations']"
+            (click)="changeUrl('/dash/marketPreparations')">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3 *ngIf="planning">{{planning}}</h3>
+                <p>Plannings</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            <a *ngIf="role!='ADMIN'"class="small-box-footer"  [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+             <a *ngIf="role==='ADMIN'" class="small-box-footer" [ngClass]="{active:url==='/plannings'}" [routerLink]="['/dash/plannings']"
+            (click)="changeUrl('/dash/plannings')">More info <i class="fas fa-arrow-circle-right"></i></a>
+            
+        </div>
+    </div>
+
+    <div class="col-md">
+
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3 *ngIf="workAndDep">{{workAndDep}}</h3>
+                <p title="workAndDeployments">W/Deployment</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+            <a *ngIf="role!='ADMIN'"class="small-box-footer"  [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a *ngIf="role==='ADMIN'" class="small-box-footer" [ngClass]="{active:url==='/workAndDeployments'}" [routerLink]="['/dash/workAndDeployments']"
+           (click)="changeUrl('/dash/workAndDeployments')">More info <i class="fas fa-arrow-circle-right"></i></a>
+           
+        </div>
+    </div>
+    
+    <div class="col-md">
+
+        <div class="small-box bg-dark">
+            <div class="inner">
+                <h3 *ngIf="capacityBuild">{{capacityBuild}}</h3>
+                <p>Capacity Building</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+            <a *ngIf="role!='ADMIN'"class="small-box-footer"  [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a *ngIf="role==='ADMIN'" class="small-box-footer" [ngClass]="{active:url==='/capacityBuildings'}" [routerLink]="['/dash/capacityBuildings']"
+           (click)="changeUrl('/dash/capacityBuildings')">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div> 
+    </div>
+   
+    <div class="col-md">
+
+        <div class="small-box bg-secondary">
+            <div class="inner">
+                <h3 *ngIf="educationAndTraining">{{educationAndTraining}}</h3>
+                <p>Education And Training</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+            <a *ngIf="role!='ADMIN'"class="small-box-footer"  [routerLink]="[]">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a *ngIf="role==='ADMIN'" class="small-box-footer" [ngClass]="{active:url==='/educationAndTrainings'}" [routerLink]="['/dash/educationAndTrainings']"
+           (click)="changeUrl('/dash/educationAndTrainings')">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row mt-5" *ngIf="role==='PROCESS_EXPERT'">
+    <div class="col-lg-3 col-md" *ngIf="role.substring(0,5)!=='ZONE_'">
+        <div class="small-box bg-primary text-white">
+            <div class="inner">
+                <h3 *ngIf="reportData">{{reportData.length>0?reportData.length:0}}<sup
+                        style="font-size: 20px"></sup></h3>
+                <p>Total Reports</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+            <a class="small-box-footer"[routerLink]="['/dash/reports']">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md" *ngIf="role.substring(0,5)!=='ZONE_'">
+        <div class="small-box bg-success text-white">
+            <div class="inner">
+                <h3>{{draftReport>0?draftReport:0}}</h3>
+                <p>Draft Reports</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            <a class="small-box-footer"[routerLink]="['/dash/reports']">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md" *ngIf="role.substring(0,5)!=='ZONE_'">
+
+        <div class="small-box bg-secondary">
+            <div class="inner">
+                <h3>{{reviewedReport>0?reviewedReport:0}}</h3>
+                <p>Reviewed Reports</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+            <a href="" class="small-box-footer"[routerLink]="['/dash/reports']">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md">
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>{{sentReport>0?sentReport:0}}</h3>
+                <p>Sent Reports</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a class="small-box-footer"[routerLink]="['/dash/reports']">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md">
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>{{acceptedReport>0?acceptedReport:0}}</h3>
+                <p>Accepted Reports</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a class="small-box-footer"[routerLink]="['/dash/reports']">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md">
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>{{rejectedReport>0?rejectedReport:0}}</h3>
+                <p>Rejected Reports</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a class="small-box-footer"[routerLink]="['/dash/reports']">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md">
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>{{pendingReport>0?pendingReport:0}}</h3>
+                <p>Pending Reports</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a class="small-box-footer"[routerLink]="['/dash/reports']">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+</div>
+<div class="row mt-s" *ngIf="role.substring(0,7)=='WOREDA_' || role==='MAYER'">
+    <div class="col-lg-3 col-md">
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>{{reportByOfficeSent>0?reportByOfficeSent:0}}</h3>
+                <p>Sent Reports</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a class="small-box-footer"[routerLink]="['/dash/reports']">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md">
+        <div class="small-box bg-primary text-success">
+            <div class="inner">
+                <h3>{{reportByOfficeAccepted>0?reportByOfficeAccepted:0}}<sup
+                        style="font-size: 20px"></sup></h3>
+                <p>Accepted Reports</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+            <a class="small-box-footer"[routerLink]="['/dash/reports']">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md" *ngIf="role.substring(0,7)==='WOREDA_'">
+        <div class="small-box bg-success text-white">
+            <div class="inner">
+                <h3>{{reportByOfficeReviewed>0?reportByOfficeReviewed:0}}</h3>
+                <p>Reviewed Reports</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            <a class="small-box-footer"[routerLink]="['/dash/reports']">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md">
+
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>{{reportByOfficeRejected>0?reportByOfficeRejected:0}}</h3>
+                <p>Rejected Reports</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+            <a href="" class="small-box-footer"[routerLink]="['/dash/reports']">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+   
+    <div class="col-lg-3 col-md">
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>{{reportByOfficePending>0?reportByOfficePending:0}}</h3>
+                <p>Pending Reports</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a class="small-box-footer"[routerLink]="['/dash/reports']">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+</div>
+</div>

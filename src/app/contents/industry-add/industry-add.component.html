@@ -1,0 +1,148 @@
+<section class="content container-fluid">
+    <mat-card>
+            <mat-card-content class="top-card">
+                <button mat-raised-button>Add Industry </button>
+                <button mat-raised-button [routerLink]="['/dash/industries']">List </button>
+            </mat-card-content>
+        
+    </mat-card>
+    <mat-card>
+        <mat-horizontal-stepper animationDuration="1000" [linear]="false">
+            <form [formGroup]="registrationForm">
+                <mat-step label="Industry Details">
+                    <mat-card-content>
+                        <div class="form-row">
+                           
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Industry Name</mat-label>
+                                    <input matInput placeholder="enter first name" formControlName="industryName">
+                                </mat-form-field>
+                            
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Location</mat-label>
+                                    <input matInput placeholder="enter Location" formControlName="location">
+                                </mat-form-field>
+                                 
+                        </div>
+                        <div class="form-row">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Contact Info</mat-label>
+                                    <input matInput placeholder="enter contact Info" formControlName="contactInfo">
+                                </mat-form-field>
+                            
+                                <mat-form-field appearance="fill">
+                                    <mat-label>type</mat-label>
+                                    <input matInput placeholder="enter type" formControlName="type">
+                                </mat-form-field>
+                                  
+                        </div>
+                        <div class="form-row">
+                           
+                            <mat-form-field appearance="fill">
+                                <mat-label>Leader Name</mat-label>
+                                <input matInput placeholder="enter first name" formControlName="leaderName">
+                            </mat-form-field>
+                        
+                            <mat-form-field appearance="fill">
+                                <mat-label>Position</mat-label>
+                                <input matInput placeholder="enter Location" formControlName="position">
+                            </mat-form-field>
+                             
+                    </div>
+                        <div class="row">
+                            <mat-form-field appearance="fill">
+                                <mat-label>shortDescription</mat-label>
+                                <textarea matInput
+                                cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize"
+                                cdkAutosizeMinRows="4"
+                                cdkAutosizeMaxRows="10" formControlName="shortDescription"></textarea>
+                            </mat-form-field>
+                      
+                        
+                            <mat-form-field appearance="fill">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput
+                                cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize"
+                                cdkAutosizeMinRows="4"
+                                cdkAutosizeMaxRows="10" formControlName="description"></textarea>
+                            </mat-form-field>
+                       
+                        </div>
+                        <div class="row">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Mission</mat-label>
+                                <textarea matInput
+                                cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize"
+                                cdkAutosizeMinRows="4"
+                                cdkAutosizeMaxRows="10" formControlName="mission"></textarea>
+                                
+                                
+                            </mat-form-field>
+                            
+                      
+                        
+                            <mat-form-field appearance="fill">
+                                <mat-label>Vision</mat-label>
+                                <textarea matInput
+                                cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize"
+                                cdkAutosizeMinRows="4"
+                                cdkAutosizeMaxRows="10" formControlName="vission"></textarea>
+                            </mat-form-field>
+                       
+                        </div>
+                        <div class="row">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Core Values</mat-label>
+                                <textarea matInput
+                                cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize"
+                                cdkAutosizeMinRows="4"
+                                cdkAutosizeMaxRows="10" formControlName="coreValues"></textarea>
+                            </mat-form-field> 
+                            <div class="form-group col-md" >
+                                <label>Thumbnail</label>
+                                <input type="file" class="form-control" placeholder="enter last name"(change)="selectFile($event)">
+                                <span *ngIf="errorAttachment1" style="color:red">please select image file only</span>
+                            </div>
+                            <div class="form-group col-md" >
+                                <label>Leader Photo</label>
+                                <input type="file" class="form-control" placeholder="enter last name"(change)="selectPhoto($event)">
+                                <span *ngIf="errorAttachment2" style="color:red">please select image file only</span>
+                            </div>
+                           
+                        </div>
+                        <div class="form-group col-md" *ngIf="false">
+                            <mat-label>Leader test</mat-label>
+                        <editor [init]="{
+                            plugins: 'lists link image table code help wordcount advlist autolink charmap print preview anchor|\
+                             searchreplace visualblocks fullscreen|\
+                             insertdatetime media table paste wordcount',
+                            base_url: '/tinymce',
+                            suffix: '.min' ,
+                            toolbar:'undo redo | formatselect | bold italic backcolor | \
+                                        alignleft aligncenter alignright alignjustify | \
+                                        bullist numlist outdent indent | removeformat'
+                           }">
+                          </editor>
+                          </div>
+                    </mat-card-content>
+                    
+
+                    <button mat-raised-button color="primary"*ngIf="!update" (click)="addIndustry()">Submit</button>
+                    <button mat-raised-button color="primary" *ngIf="update" (click)="updateOtherIndustry()">update</button>
+                </mat-step>
+
+                
+               
+                
+            </form>
+        </mat-horizontal-stepper>
+    </mat-card>
+
+
+</section>
+

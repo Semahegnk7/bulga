@@ -1,0 +1,61 @@
+<section class="content container-fluid">
+<mat-card>
+    <mat-card-content class="top-card">
+        <button mat-raised-button>Departments</button>
+        <button mat-raised-button [routerLink]="['/dash/addDepartment']">New</button>
+    </mat-card-content>
+</mat-card>
+<mat-card>
+    <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    </mat-form-field>
+  </mat-card>
+
+<div class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Middle Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+        </ng-container>
+        
+
+        <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-button color="accent" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="setId(element.id)"><mat-icon>delete</mat-icon></button>|<button (click)="setEditId(element.id)" mat-button
+                    color="primary"><mat-icon  >edit</mat-icon></button> </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10, 50, 100]" aria-label="Select page" showFirstLastButtons>
+    </mat-paginator>
+</div>
+</section>
+<div class="modal fade mt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+            <div class="modal-body">
+            <div class="text-center">
+                <i class="fa fa-exclamation-triangle" style="font-size: 40px; color: red;"></i>
+                <h4 class="mt-2">Confirmation!</h4>
+                <p class="mt-3">Are You Sure?</p>
+                <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" (click)="deleteDept()" data-bs-dismiss="modal">Continue</button>
+            </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>

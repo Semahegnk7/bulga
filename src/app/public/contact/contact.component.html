@@ -1,0 +1,75 @@
+<style>
+    .socialLink a {
+        text-decoration: none;
+    }
+
+    .socialLink li {
+        text-decoration: none;
+        margin-left: 1%;
+        list-style-type: none;
+    }
+</style>
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="row">
+
+        <img src="assets/images/h2.jpg" alt="Contact picture" height="250rem" width="100%">
+
+    </div>
+
+    <div class="row">
+        <div class="map col-md-6">
+            <h3>Look our address on map</h3>
+            
+
+            <div class="google-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d44554.03646279743!2d39.178390602426035!3d9.239140966927229!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164bcf9fc207bc55%3A0x93d4c708de7192ad!2sBulga%20City%2C%20Amhara%20Region!5e0!3m2!1sen!2set!4v1690982235022!5m2!1sen!2set"
+                width="100%" height="500" allowfullscreen=""
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+        <div class="col-md-6 conatainer">
+            <div class="conatainer row text-center">
+                <h2>Contact Me</h2>
+               <div class="col-md">
+                <p title="Name"> <strong><i style="font-size: large;" class="fa fa-globe" aria-hidden="true"></i></strong> www.bulgacity.com.et</p>
+                <p title="fa-phone"> <strong><i style="font-size: large;" class="fa fa-phone" aria-hidden="true"></i></strong>&nbsp;&nbsp; 0909943342</p>
+                <p title="Email"><strong><i style="font-size: large;"class="fa fa-envelope" aria-hidden="true"></i></strong>&nbsp;&nbsp; simegn0909@gmail.com</p>
+            </div>
+            <div class="col-md">
+                <p title="Fax"><strong><i style="font-size: large;" class="fa fa-fax" aria-hidden="true"></i></strong>&nbsp;&nbsp; fax:+251909943342</p>
+            <p title="Address"><strong> <i style="font-size: large;"  class="fa fa-map-marker" aria-hidden="true"></i></strong>&nbsp;&nbsp;  Bulga City Administration</p>
+           </div>
+            </div>
+            <h3>Send us a Message</h3>
+            <form [formGroup]="contactForm">
+            <div class="form-group">
+                <input type="text" class="form-control" name="name" formControlName="name" placeholder="Name" required><br>
+                <input type="email" class="form-control" name="email" formControlName="email" placeholder="Email" required><br>
+                <textarea name="message" class="form-control" placeholder="Message" formControlName="message"  required rows="4"></textarea><br>
+                <input type="submit" class="btn btn-primary" (click)="submit()" value="Submit">
+            </div>
+        </form>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <h3>Operating Hours</h3>
+                <p>Monday to Friday <strong>2:30 -11:00</strong> in local time</p>
+                </div>
+   
+    <div class="col-md-9">
+    <div class="container mt-2 ">
+        <h3> Follow Us</h3>
+        <ul class="conatainer bg-light d-flex p-3 socialLink">
+            <li><a href="">Facebook</a></li>
+            <li><a href="">Twitter</a></li>
+            <li><a href="">Instagram</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+</div>
+<app-footer></app-footer>

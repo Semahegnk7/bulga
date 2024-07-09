@@ -1,0 +1,42 @@
+.top-card{
+    display: flex;
+    justify-content: space-between;
+}
+mat-card{    
+    margin: 0.5rem;
+}
+mat-table {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .mat-elevation-z8{
+    margin: 0.5rem;
+  }
+  mat-cell, mat-header-cell, mat-footer-cell {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    overflow: visible!important;
+}
+
+    td, th {
+    width: 25%;
+  }
+@media screen and (max-width:490px){
+    .top-card{
+        display: block;
+        width: 100%;
+    }
+    mat-table{
+      width: 100%;
+       overflow-x: auto;
+    }
+    mat-cell mat-header-cell mat-footer-cell {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        overflow: visible; 
+    }
+   
+}

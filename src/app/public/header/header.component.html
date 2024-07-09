@@ -1,0 +1,85 @@
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container">
+    <a class="navbar-brand">
+      <img src="assets/images/Ethiopia_flag.png" alt="Logo" height="60rem" width="75rem" title="Bulga Website Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item" [routerLink]="['/home']" [ngClass]="{active:url==='/home'}"(click)="changeUrl('/home')">
+          <a class="nav-link" [routerLink]="['/home']">Home</a>
+        </li>
+        <li class="nav-item"[routerLink]="['/about']"  [ngClass]="{active:url==='/about'||url==='/industry'}"(click)="changeUrl('/about')">
+          <a class="nav-link" [routerLink]="['/about']">About</a>
+        </li>
+        <li class="nav-item"[routerLink]="['/contact']"  [ngClass]="{active:url==='/contact'}"(click)="changeUrl('/contact')">
+          <a class="nav-link" [routerLink]="['/contact']">Contact</a>
+        </li> 
+        <li class="nav-item"  [ngClass]="{active:url==='/industries'|| url==='/industry'}"(click)="changeUrl('/industries')">
+          <a class="nav-link" [routerLink]="['/industries']">Industries</a>
+        </li>
+       <li class="nav-item"  [ngClass]="{active:url==='/announcement'}"(click)="changeUrl('/announcement')">
+          <a class="nav-link" [routerLink]="['/announcement']">Announcement</a>
+        </li>
+        <!-- <li *ngIf="publicReg==='true'" class="nav-item" [routerLink]="['/registration']"  [ngClass]="{active:url==='/registration'}"(click)="changeUrl('/registration')">
+          <a class="nav-link" [routerLink]="['/registration']">Registration</a>
+        </li> -->
+        <li class="nav-item" [routerLink]="['/registration']"  [ngClass]="{active:url==='/registration'}"(click)="changeUrl('/registration')">
+          <a class="nav-link" [routerLink]="['/registration']">Registration</a>
+        </li>
+      </ul>
+        <form class="d-flex">
+        <button class="btn btn-primary" type="button" data-bs-target="#loginModal" *ngIf="!loggedIn" data-bs-toggle="modal" >Login</button>
+        <button class="btn btn-primary" type="button" *ngIf="loggedIn" [routerLink]="['/dash/dashboard']" >My Account</button>
+        </form>
+    </div>
+  </div>
+</nav>
+<!-- The Modal -->
+<div class="modal fade" id="loginModal">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Login</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form [formGroup]="loginForm">
+          <div *ngIf="error" class="alert alert-danger alert-dismissible fade show col-md-12" role="alert">
+            <strong>Error!</strong> Incorrect Username or Password.
+            
+            <i class="fa fa-close" (click)="removeMassage()" style="font-size: 20px; float: right; font-weight: bold;margin-right: -20px;"> </i>
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" formControlName="userName" class="form-control" id="email" placeholder="Enter email" name="email">
+        </div>
+        <div class="mb-3">
+          <label for="pwd" class="form-label">Password:</label>
+          <input type="password" formControlName="password" class="form-control" id="pwd" placeholder="Enter password" name="password"
+                      >
+        </div>
+        <div class="form-check mb-3">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" name="remember"> Remember me
+          </label>
+        </div>
+        <button type="submit" [disabled]="loggingIn" class="btn btn-primary" (click)="signIn(loginForm)">Sign In</button>
+      </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

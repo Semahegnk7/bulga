@@ -1,0 +1,309 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+    <a class="brand-link">
+        <img src="assets/images/Ethiopia_flag.png" alt="Logo" class="brand-image img-thumbnail elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">All-In-One</span>
+    </a>
+
+    <div class="sidebar">
+
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <li class="nav-item menu-open" *ngIf="role=='ADMIN' || role=='WOREDA_COORDINATOR'||role=='PROCESS_EXPERT' ||role=='MAYER'">
+                    <a href="#" class="nav-link" [ngClass]="{active: url==='/dash/dashboard'}"
+                        [routerLink]="['/dash/dashboard']" (click)="changeUrl('/dash/dashboard')">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                    
+                </li>
+
+
+                <!-- <li class="nav-item menu-open" *ngIf="role=='MAYER'">
+                    <a href="#" class="nav-link" [ngClass]="{active: url==='/dash/zDashboard'}"
+                        [routerLink]="['/dash/zDashboard']" (click)="changeUrl('/dash/zDashboard')">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li> -->
+
+                <li class="nav-item menu-open" *ngIf="role==='EDUCATION_AND_TRAINING' ||role==='INDUSTRY_EXTENSION'
+                ||role==='MARKET_PREPARATION' ||role==='PLANNING' ||role==='CAPACITY_BUILDING' ||role==='WORK_AND_DEPLOYMENT'  ||role.substring(0,5)==='ZONE_'">
+                    <a href="#" class="nav-link" [ngClass]="{active: url==='/dash/user-dashboard'}"
+                        [routerLink]="['/dash/user-dashboard']" (click)="changeUrl('/dash/user-dashboard')">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+               
+                <li class="nav-item" *ngIf="role=='ADMIN'">
+                    <a href="" class="nav-link" [routerLink]="['/dash/admins']" (click)="changeUrl('/dash/admins')"
+                    [ngClass]="{active:url==='/dash/admins' ||url==='/dash/addAdmin'}">
+                        <i class="nav-icon fa fa-user "></i>
+                        <p>Admins</p>
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="role=='WOREDA_COORDINATOR' || role=='PROCESS_EXPERT'">
+                    <a href="" class="nav-link" [routerLink]="['/dash/kebeles']" (click)="changeUrl('/dash/kebeles')"
+                    [ngClass]="{active:url==='/dash/kebeles'||url==='/dash/addKebele'}">
+                        <i class="nav-icon far fa-address-card "></i>
+                        <p>Kebele</p>
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="role=='WOREDA_COORDINATOR' || role=='PROCESS_EXPERT'">
+                    <a class="nav-link" [routerLink]="['/dash/goths']" (click)="changeUrl('/dash/goths')"
+                    [ngClass]="{active:url==='/dash/goths'||url==='/dash/addGoth'}">
+                        <i class="nav-icon far fa-address-book "></i>
+                        <p>Goth(ጎጥ)</p>
+                    </a>
+                </li>
+                
+                <li class="nav-item" *ngIf="role=='WOREDA_COORDINATOR' || role=='PROCESS_EXPERT'"title="የተመዘገቡ ስራ ፈላጊዎች">
+                    <a href="" class="nav-link" [routerLink]="['/dash/jobSeekers']" (click)="changeUrl('/dash/jobSeekers')"
+                    [ngClass]="{active:url==='/dash/jobSeekers'|| url==='/dash/addJobSeeker'}">
+                        <i class="nav-icon fa  fa-user-graduate"></i>
+                        <p>Job Seekers</p>
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="false">
+                    <a href="" class="nav-link" [routerLink]="['/dash/uploadBulkData']" (click)="changeUrl('/dash/uploadBulkData')"
+                    [ngClass]="{active:url==='/dash/uploadBulkData'||url==='/dash/addUploadBulkData'}">
+                        <i class="nav-icon  fas fa-upload "></i>
+                        <p>Bulk Data Upload</p>
+                    </a>
+                </li>
+
+                <li class="nav-item" *ngIf="role=='WOREDA_COORDINATOR' || role=='PROCESS_EXPERT'"title="የሰለጠኑ ስራ ፈላጊዎች">
+                    <a href="" class="nav-link" [routerLink]="['/dash/trainedSeekers']" (click)="changeUrl('/dash/trainedSeekers')"
+                    [ngClass]="{active:url==='/dash/trainedSeekers'||url==='/dash/addTrainedSeeker'}">
+                        <i class="nav-icon fas fa-person-booth"></i> 
+                        <p>Trained Seekers</p>
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="role=='WOREDA_COORDINATOR' || role=='PROCESS_EXPERT'" title="የተቀጠሩ">
+                    <a href="" class="nav-link" [routerLink]="['/dash/hiredSeekers']" (click)="changeUrl('/dash/hiredSeekers')"
+                    [ngClass]="{active:url==='/dash/hiredSeekers'||url==='/dash/addHiredSeeker'}">
+                        <i class="nav-icon fa fas fa-user-circle "></i>
+                        <p>Hired Seekers</p>
+                    </a>
+                </li>
+
+             <!--    <li class="nav-item" *ngIf="role=='ADMIN'">
+                    <a href="" class="nav-link" [routerLink]="['/dash/siraHidetOfficers']" (click)="changeUrl('/dash/siraHidetOfficers')"
+                    [ngClass]="{active:url==='/dash/siraHidetOfficers'||url==='/dash/addSiraHidetOfficer'}">
+                        <i class="nav-icon far fas fas fa-user-nurse "></i>
+                        <p>Sira Edil Fetera Hidet</p>
+                    </a>
+                </li> -->
+                <li class="nav-item" *ngIf="role=='ADMIN'">
+                    <a href="" class="nav-link" [routerLink]="['/dash/woredaCoordinators']" (click)="changeUrl('/dash/woredaCoordinators')"
+                    [ngClass]="{active:url==='/dash/woredaCoordinators'||url==='/dash/addWoredaCoordinator'}">
+                        <i class="nav-icon far fas fa-user-check "></i>
+                        <p>Woreda Coordinator</p>
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="role=='ADMIN' && false">
+                    <a href="" class="nav-link" [routerLink]="['/dash/zoneCoordinators']" (click)="changeUrl('/dash/zoneCoordinators')"
+                    [ngClass]="{active:url==='/dash/zoneCoordinators'||url==='/dash/addZoneCoordinator'}">
+                        <i class="nav-icon far fas fa-user-tie"></i>
+                        <p>Zone Coordinator</p>
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="role==='ADMIN'">
+                    <a class="nav-link" [ngClass]="{active: url==='/dash/addUser'||url==='/dash/industryExtensions'
+                     ||url==='/dash/educationAndTrainings'||url==='/dash/marketPreparations'||url==='/dash/plannings'
+                      ||url==='/dash/capacityBuildings'||url==='/dash/workAndDeployments'|| url==='/dash/siraHidetOfficers'}"
+                    [routerLink]="['/dash/addUser']" (click)="changeUrl('/dash/addUser')">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>Woreda Users<i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="background-color:rgb(47, 54, 4);">
+                        <li class="nav-item">
+                            <a  class="nav-link" [routerLink]="['/dash/addUser']" (click)="changeUrl('/dash/addUser')"
+                            [ngClass]="{active:url==='/dash/addUser'}">
+                                <i class="fas fa-plus nav-icon"></i>
+                                <p>Add Users</p>
+                            </a>
+                        </li>
+                        <li class="nav-item" title="የስራ እድል ፈተራ">
+                            <a  class="nav-link" [routerLink]="['/dash/siraHidetOfficers']" (click)="changeUrl('/dash/siraHidetOfficers')"
+                            [ngClass]="{active:url==='/dash/siraHidetOfficers'}">
+                                <i class="nav-icon far fas fa-industry"></i>
+                                <p>Sira Edil Fetera</p>
+                            </a>
+                        </li>
+                        <li class="nav-item" title="ኢንዱስትሪ ኢክስቴንሽን">
+                            <a  class="nav-link" [routerLink]="['/dash/industryExtensions']" (click)="changeUrl('/dash/industryExtensions')"
+                            [ngClass]="{active:url==='/dash/industryExtensions'}">
+                                <i class="nav-icon far fas fa-industry"></i>
+                                <p>Industry Extension</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item"  title="ትምህርትና ስልጠና">
+                            <a  class="nav-link" [routerLink]="['/dash/educationAndTrainings']" (click)="changeUrl('/dash/educationAndTrainings')"
+                            [ngClass]="{active:url==='/dash/educationAndTrainings'}">
+                                <i class="nav-icon far fas fas fa-graduation-cap"></i>
+                                <p>Education And Training</p>
+                            </a>
+                        </li>
+                        <li class="nav-item"title="ገበያ ዝግጅት">
+                            <a  class="nav-link" [routerLink]="['/dash/marketPreparations']" (click)="changeUrl('/dash/marketPreparations')"
+                            [ngClass]="{active:url==='/dash/marketPreparations'}">
+                                <i class="nav-icon fas fa-funnel-dollar"></i>
+                                <p >Market Preparation</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item" title="እቅድ ዝግጅት">
+                            <a  class="nav-link" [routerLink]="['/dash/plannings']" (click)="changeUrl('/dash/plannings')"
+                            [ngClass]="{active:url==='/dash/plannings'}">
+                                <i class="nav-icon far fas fa-tasks"></i>
+                                <p>Planning</p>
+                            </a>
+                        </li>
+                        <li class="nav-item"  title="የተቋም አቅም ግንባታ">
+                            <a  class="nav-link" [routerLink]="['/dash/capacityBuildings']" (click)="changeUrl('/dash/capacityBuildings')"
+                            [ngClass]="{active:url==='/dash/capacityBuildings'}">
+                                <i class="nav-icon far fas fa-train"></i>
+                                <p>Capacity Building</p>
+                            </a>
+                        </li>
+                        <li class="nav-item"title="ስራና ስምሪት">
+                            <a  class="nav-link" [routerLink]="['/dash/workAndDeployments']" (click)="changeUrl('/dash/workAndDeployments')"
+                            [ngClass]="{active:url==='/dash/workAndDeployments'}">
+                                <i class="nav-icon far fas fa-server"></i>
+                                <p >Work and Deployment</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item" *ngIf="role=='ADMIN'">
+                    <a href="" class="nav-link" [routerLink]="['/dash/mayers']" (click)="changeUrl('/dash/mayers')"
+                    [ngClass]="{active:url==='/dash/mayers'||url==='/dash/addMayer'}">
+                        <i class="nav-icon  fas fa-user-cog "></i>
+                        <p>Mayer(ከንቲባ)</p>
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="role=='ADMIN'">
+                    <a [ngClass]="{active: url==='/dash/zonalUsers'||url==='/dash/addZonalUser'}"
+                        [routerLink]="['/dash/zonalUsers']" (click)="changeUrl('/dash/zonalUsers')" class="nav-link">
+                        <i class="nav-icon fa fas fa-user-edit"></i>
+                        <p>
+                            Zonal Users
+                        </p>
+                    </a>
+                </li>          
+                <li class="nav-item" *ngIf="role=='ADMIN'">
+                    
+                    <a  class="nav-link" [routerLink]="['/dash/services']" (click)="changeUrl('/dash/services')"
+                    [ngClass]="{active:url==='/dash/services'}">
+                        <i class="nav-icon fa fa-business-time"></i>
+                        <p>Services</p>
+                    </a>
+                </li> <li class="nav-item" *ngIf="role=='ADMIN'">
+                    <a href="" class="nav-link" [routerLink]="['/dash/announcements']" (click)="changeUrl('/dash/announcements')"
+                    [ngClass]="{active:url==='/dash/announcements'||url==='/dash/addAnnouncement'}">
+                        <i class="nav-icon fa fa-bullhorn"></i>
+                        <p>Announcements</p>
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="role=='ADMIN'" title="frequently Asked questions">
+                    <a href="" class="nav-link" [routerLink]="['/dash/faqs']" (click)="changeUrl('/dash/faqs')"
+                    [ngClass]="{active:url==='/dash/faqs'}">
+                        <i class="nav-icon  far fa-question-circle "></i>
+                        <p>FAQs</p>
+                    </a>
+                </li>
+
+               
+                <li class="nav-item" *ngIf="role=='ADMIN'">
+                    <a [ngClass]="{active: url==='/dash/settings'||url==='/dash/settings'}"
+                        [routerLink]="['/dash/settings']" (click)="changeUrl('/dash/settings')" class="nav-link">
+                        <i class="nav-icon fas fa-cog"></i>
+                        <p>
+                            System Settings
+                        </p>
+                    </a>
+                </li>
+             
+                <li [routerLink]="" class="nav-item" *ngIf="role=='ADMIN' && false">
+                    <a class="nav-link">
+                        <i class="nav-icon fa fa-history"></i>
+                        <p>
+                            Audit Trail
+                        </p>
+                    </a>
+                </li>
+
+                <li [routerLink]="['/dash/office']" class="nav-item" *ngIf="role=='ADMIN' && false">
+                    <a class="nav-link" [ngClass]="{active: url==='/dash/office'}" (click)="changeUrl('/dash/office')" >
+                        <i class="nav-icon fa fa-building"></i>
+                        <p>
+                            Company Maintenance
+                        </p>
+                    </a>
+                </li>
+
+
+                <li class="nav-item" *ngIf="role==='ADMIN'">
+                    <a [ngClass]="{active: url==='/dash/industryInfo' || url==='/dash/addIndustry'|| url==='/dash/industries'}"
+                        [routerLink]="['/dash/industries']" (click)="changeUrl('/dash/industries')" class="nav-link">
+                        <i class="nav-icon fas fas fa-gopuram"></i>
+                        <p>
+                            Industries
+                        </p>
+                    </a>
+                </li>
+                
+                <li class="nav-item" *ngIf="role!=='ADMIN'">
+                    <a [ngClass]="{active: url==='/dash/reports'||url==='/dash/report'}" [routerLink]="['/dash/reports']"
+                        (click)="changeUrl('/dash/reports')" class="nav-link">
+                        <i class="nav-icon far fa-file"></i>
+                        <p>
+                            Report
+                        </p>
+                    </a>
+                </li>
+              
+                <li class="nav-item">
+                    <a [ngClass]="{active: url==='/dash/notifications'}" [routerLink]="['/dash/notifications']"
+                        (click)="changeUrl('/dash/notifications')" class="nav-link">
+                        <i class="nav-icon far fa-comment"></i>
+                        <p>
+                            Notification
+                        </p>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a [ngClass]="{active: url==='/dash/profile'}" [routerLink]="['/dash/profile']"
+                        (click)="changeUrl('/dash/profile')" class="nav-link">
+                        <i class="nav-icon far fas fa-user-edit"></i>
+                        <p>
+                            My Account
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item"  *ngIf="role!=='ADMIN'">
+                    <a  (click)="logOutUser()" class="nav-link">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>
+                            Logout
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+
+</aside>

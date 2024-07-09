@@ -1,0 +1,58 @@
+<section class="content container-fluid">
+    <mat-card>
+            <mat-card-content class="top-card">
+                <button mat-raised-button>Add Report </button>
+                <button mat-raised-button [routerLink]="['/dash/reports']">List </button>
+            </mat-card-content>
+        
+    </mat-card>
+    <mat-card>
+        <mat-horizontal-stepper animationDuration="1000" [linear]="false">
+            <form [formGroup]="registrationForm">
+                <mat-step label="Report Details">
+                    <mat-card-content>
+                        <div class="form-row">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Report Title</mat-label>
+                                <input matInput placeholder="enter first name" formControlName="name">
+                            </mat-form-field>
+                           
+                            
+                        </div>
+                        <div class="row">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput
+                                cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize"
+                                cdkAutosizeMinRows="4"
+                                cdkAutosizeMaxRows="10" formControlName="remark"></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4" >
+                                <label>Attachment</label>
+                                <input type="file" class="form-control" placeholder="enter last name"(change)="selectFile($event)">
+                            </div>
+                                <mat-form-field>
+                                <mat-label>Uploaded By</mat-label>
+                                <input matInput placeholder="enter User Name" formControlName="uploadedBy">
+                            </mat-form-field>
+                        </div>
+                    </mat-card-content>
+                    
+
+                    <button mat-raised-button color="primary"*ngIf="!update" (click)="addReport()">Submit</button>
+                    <button mat-raised-button color="primary" *ngIf="update" (click)="updateReport()">update</button>
+                </mat-step>
+
+                
+               
+                
+            </form>
+        </mat-horizontal-stepper>
+    </mat-card>
+
+
+</section>
+

@@ -1,0 +1,13 @@
+.top-card{
+    display: flex;
+    justify-content: space-between;
+}
+mat-card{
+    padding: 0.5rem;
+     margin: 1rem;
+}
+img:hover {
+    transform: scaleX(-1);
+    transition: 0.8s;
+    cursor: pointer;
+  }

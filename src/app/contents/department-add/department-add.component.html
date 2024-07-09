@@ -1,0 +1,27 @@
+
+<section class="content container-fluid">
+    <mat-card>
+        <mat-card-content class="top-card">
+            <button mat-raised-button>Add Form </button>
+            <button mat-raised-button [routerLink]="['/dash/departments']">List </button>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+<form [formGroup]="departmentForm">
+    <div class="card-body">
+    <div class="form-group">
+    <label for="exampleInputEmail1">Title</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="department title" formControlName="title">
+    </div>
+    <div class="form-group">
+        <label>description</label>
+        <textarea class="form-control" rows="3" placeholder="Enter description" formControlName="description"></textarea>
+        </div>
+    </div>
+    <div class="card-footer">
+    <button type="submit" *ngIf="!update"class="btn btn-primary" (click)="addDepartment()">Submit</button>
+    <button type="submit" *ngIf="update" class="btn btn-primary" (click)="updateDept()">Update</button>
+    </div>
+    </form>
+</mat-card>
+</section>

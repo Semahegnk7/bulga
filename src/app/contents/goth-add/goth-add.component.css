@@ -1,0 +1,11 @@
+.top-card{
+    display: flex;
+    justify-content: space-between;
+}
+mat-card{    
+    margin: 1rem;
+}
+mat-form-field {
+    width: 50%;
+    padding: 0.5rem;
+  }

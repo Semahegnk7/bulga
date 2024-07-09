@@ -1,0 +1,66 @@
+<section class="content container-fluid">
+    <mat-card>
+        <mat-card-content class="top-card">
+            <button mat-raised-button>Add Announcement </button>
+            <button mat-raised-button [routerLink]="['/dash/announcements']">List </button>
+        </mat-card-content>
+
+    </mat-card>
+    <mat-card>
+        <mat-horizontal-stepper animationDuration="1000" [linear]="false">
+            <form [formGroup]="registrationForm">
+                <mat-step label="Announcement">
+                    <mat-card-content>
+                        <div class="form-row">
+                            <div class="col-md">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Title</mat-label>
+                                    <input matInput placeholder="enter title" formControlName="title">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md">
+                                <mat-form-field>
+                                    <mat-label>Posted By</mat-label>
+                                    <input matInput placeholder="enter department or user" formControlName="postedBy">
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Contents</mat-label>
+                                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                    cdkAutosizeMinRows="4" cdkAutosizeMaxRows="10" formControlName="content"></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md">
+                                <label>Thumbnail</label>
+                                <input type="file" class="form-control" placeholder="enter last name" #fileInput
+                                    (change)="selectFile($event)">
+                                    <span *ngIf="errorImage" style="color:red">Please Select image file only!!!</span>
+                            </div>
+                            <div class="col-md">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Published Date</mat-label>
+                                <input matInput placeholder="enter published dae" formControlName="publishDate">
+                            </mat-form-field>
+                        </div>
+                        </div>
+                    </mat-card-content>
+
+
+                    <button mat-raised-button color="primary" *ngIf="!update" (click)="addAnnouncement()">Submit</button>
+                    <button mat-raised-button color="primary" *ngIf="update" (click)="updateAnnouncement()">update</button>
+                </mat-step>
+
+
+
+
+            </form>
+        </mat-horizontal-stepper>
+    </mat-card>
+
+
+</section>

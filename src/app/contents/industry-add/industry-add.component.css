@@ -1,0 +1,34 @@
+.top-card{
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-card {
+  margin: 1rem;
+}
+  .skill{
+    width: 66%;
+    padding: 0.5rem;
+  }
+  mat-form-field {
+    width: 50%;
+    padding: 0.5rem;
+  }
+  /* Responsive styles */
+  @media screen and (min-width: 768px) {
+    .flex-item {
+      flex: 1 0 33.33%; /* Adjusts width to 33.33% for three columns */
+      max-width: 33.33%;
+    }
+  }
+ /* For screens with width 768px and above */
+ @media (max-width: 600px) {
+  mat-form-field {
+    width: 50%; /*  or any appropriate width for desktop or larger screens */
+  }
+}
+  @media (max-width: 500px) {
+    mat-form-field {
+      width: 100%; /* or any appropriate width for mobile devices */
+    }
+  }

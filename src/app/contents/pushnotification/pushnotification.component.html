@@ -1,0 +1,67 @@
+<section class="content container-fluid">
+    <div class="home-content"  >
+     <div class="overview-boxes">
+         <div class="card"> 
+             <div class="card-header" style="text-align: left;">
+               <h5>Send Notification</h5>
+             </div>
+             <div class="card-body">
+               <form [formGroup]="pushNotificationForm">
+                <div class="form-group">
+                  <label for="title">Subject <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="subject"  id="title" (change)="subject($event)" style="justify-self: void;">
+              </div>
+              
+              <div class="form-group" style="padding-top:12px;padding-bottom:20px;">
+                <label class="col-form-label" for="description">Receiver <span
+                  class="text-danger">*</span> </label>
+                          <div class="input-group">
+                              <ng-multiselect-dropdown style="width: 100%;"
+                              [placeholder]="'Select Receiver'"
+                              [settings]="dropdownSettings"
+                              [data]="users"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="onDeSelects($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)">
+                            </ng-multiselect-dropdown>
+                          </div>  
+
+                    </div>
+
+                   <div class="form-group">
+                     <label for="description">Content <span class="text-danger">*</span></label>
+                     <textarea class="form-control" id="title" rows="5" formControlName="content" (change)="contentAction($event)" ></textarea>
+                   </div>
+
+                   <div class="form-group">
+                    <label class="col-form-label" for="description">Notification Type <span
+                      class="text-danger">*</span> </label>
+                                <select class="form-control" formControlName="type"  (change)="notiType($event)">
+                                    <option selected disabled value="">Notification Type</option>
+                                    <option class="text-danger" value="danger">Danger</option>
+                                    <option class="text-warning" value="warning">Warning</option>
+                                    <option class="text-success" value="success">Success</option>
+                                    <option class="text-info" value="info">Remainder</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                          <div class="form-group col-md-4" >
+                            <label>Attachment (optional)</label>
+                            <input type="file" class="form-control" placeholder="enter last name"(change)="selectFile($event)">
+                        </div>
+                        </div>
+               </form>
+             </div>
+             <div class="card-footer">
+              <button type="button" class="btn btn-primary" style="text-align: left;"  (click)="submitNotification()"> Save</button>
+              <button type="button" class="btn btn-secondary" style="text-align: right;" [routerLink]="['/dash','notifications']">Cancel</button>
+             
+             </div>
+           </div>
+           
+           
+     </div>
+  
+   </div>
+  </section>

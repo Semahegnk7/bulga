@@ -1,0 +1,124 @@
+<app-header></app-header>
+
+<!-- <section class="content container-fluid">
+  <div class="row p-1">
+    <div class="input-group rounded">
+      <input title="Filter Announcements by using Title,  posted by  and publish date like-2024-02-12" class="form-control rounded" placeholder="Search" aria-label="Search"
+        aria-describedby="search-addon" (keyup)="filterData($event)" />
+      <span class="input-group-text border-0" id="search-addon">
+        <i class="fas fa-search"></i>
+      </span>
+    </div>
+
+    <div class="col-md-4 mt-1"
+      *ngFor="let announcement of announcementData | paginate: { itemsPerPage: 6, id:'announcement', currentPage: announcementPage}">
+
+      <img src="assets/announcement/{{announcement.thumbnail}}" alt="" width="100%" height="250rem">
+      <h2>{{announcement.title}}</h2>
+      <div class="content">
+        <p>{{announcement.content}}</p>
+      </div>
+
+      <h5>By: {{announcement.postedBy}}</h5>
+      <P>{{announcement.publishDate | date:'medium'}}</P>
+    </div>
+
+  </div>
+
+  <div style="justify-content: center;display: flex;">
+    <a><pagination-controls id="announcement" (pageChange)="announcementPage = $event"></pagination-controls></a>
+  </div>
+
+</section> -->
+
+
+<section class="content container-fluid">
+  <div class="row p-1">
+    <div class="input-group rounded">
+      <input title="Filter Announcements by using Title,  posted by  and publish date like-2024-02-12" class="form-control rounded" placeholder="Search" aria-label="Search"
+        aria-describedby="search-addon" (keyup)="filterData($event)" />
+      <span class="input-group-text border-0" id="search-addon">
+        <i class="fas fa-search"></i>
+      </span>
+    </div>
+
+    
+    <div class="col-md-4 mt-1">
+
+    <img src="assets/announcement/medicne.jpg" alt="" width="100%" height="250rem">
+    <h2>የህክምና ዘዴዎችን ማሳወቅ</h2>
+    <div class="content">
+      <p>መርጌታ  ክብረት   የባህል መድህኒት ፈውስ እና ጥበብ በውጭ ሀገር ለሚኖሩም መምጣት ሳያስፈልግ ባሉበት እንሰራለን  
+        0918652409 ይደውሉ                  የምንሰጣቸው አገልግሎቶች ከዚህ በታች ተዘርዝረዋል ☟☟☟☟☟ ☟☟☟☟☟ ☞ 
+         ለመፍትሄ ሀብት ☞  ለህመም ☞  ለሁሉ ሠናይ ☞  ቡዳ ለበላው ☞  ለገበያ ☞  ሚስጥር የሚነግር ☞  ለቀለም(ለትምህርት) ☞ 
+          ለመፍትሔ ስራይ ☞  ፍቅረኛ ላጣ ወይም ላጣች የሚሰራ ☞  ሌባ የማያስነካ ☞  ለበረከት ☞  ለጠላት (ጠላት እንዳይጎዳ የሚያደርግ) ☞ 
+           ለግርማ ሞገስ ☞  መርበቡተ ሰለሞን ☞  ለዓይነ ጥላ ☞  ለመክስት ☞  ጸሎተ ዕለታት ☞  ለታሰረ ሰው እነዲፈታ የሚያደርግ ☞ 
+            ለእጅ ስራ (እንዲቀናህ) ☞  ለትዳር ☞  ለድምፅ ☞ ለአዙሪት ☞ ለአስቸጋሪና ተመላላሽ ሲህር ☞ ለሪህ በሽታ ☞ የመገጣጠሚያ ህመም 
+            ☞ ለጉልበት ድርቀት ☞ የባት ህመም ☞ የወገብ ህመም ☞ የአንገትና ትከሻ ህመም ☞ የከረመ ደረቅ ሳል ☞ ለደም ግፊት ☞ የሆድ መረበሽ 
+            ☞ የከፋ የሆድ ድርቀት ☞ በመኝታ ሽንት ለሚያመልጠው ባጠቃላይ እነዚህ የገለፅናቸው ጥቂቶቹ ናቸው እርሶ ምን እንድንሰራሎት ይፈልጋሉ 
+            ?በውስጥ መስመር ያማክሩን ። ከሀገር ውጪ ላላችውም መፍትሄ በልዩ ሁኔታ አለን ብቻ ይምጡ ለምንኛውም ጥያቄዎ ይደዉሉ ☎️   
+             0918652409  
+                09 18 65 24 09 ማሳሰቢያ መምጣት ለማይችል ደምበኞቻችን መድሀኒቱን ሰርተን ያሉበት ድረስ እናደርሳለን  ።</p>
+    </div>
+
+    <h5>By: simegn</h5>
+    <P>Jan 1, 2024, 10:32:03 AM</P>
+  </div>
+
+  <div class="col-md-4 mt-1">
+
+    <img src="assets/announcement/earth.png" alt="" width="100%" height="250rem">
+    <h2>የሽያጭ ቦታ ማሳወቅ</h2>
+    <div class="content">
+      <p>የሚሸጥ የመምህራን የምሬት ቦታ 200ካሬ እና 90 ቆርቆሮ የእንጨት ቤት ተሠርቶ ያለቀ በቱለፋ ከተማ። ዋጋ 1.6 ሚሊየን ድርድር ያለው።</p>
+    </div>
+
+    <h5>By: simegn</h5>
+    <P>July 9, 2024, 10:32:03 AM</P>
+  </div>
+
+  <div class="col-md-4 mt-1">
+
+    <img src="assets/announcement/potato.png" alt="" width="100%" height="250rem">
+    <h2>የድንች ሰብል አመራረት</h2>
+    <div class="content">
+      <p>ዴንች በአሇም አቀፌ ዯረጃ ከላልቹ የስራስር ሰብልች በቀዲሚነት ከስንዳ፣ በቆልና ሩዝ በመቀጠሌ ዯግሞ
+        በአራተኛነት በከፌተኛ መጠን የሚመረት ሰብሌ ነው፡፡ ወዯ አገራችን ኢትዮጵያም ከ149 አመታት በፉት /በ1858
+        እ.ኤ.አ/ በጀርመናዊው የእጽዋት ባሇሙያ ሺምፐር አማካኝነት እንዯገባ መዛግብት ያስረዲለ፡፡ ዴንች
+        በመጀመሪያዎቹ 40 አመታት ሌክ እንዯ አውሮፓና የአፌሪካ አገሮች በኢትዮጵያውያን የምግብ ሥርአት ውስጥ
+        ፇጥኖ አሌተካተተም፡፡ ይሁን እንጂ በዚሁ ክፌሇ ዘመን ማሇቂያ ማሇትም በ1900 ዓ.ም ሊይ አገሪቱን ክፈኛ
+        የመታው ዴርቅ ሇዴንች መስፊፊት መሌካም አጋጣሚን ፇጥሮ አሌፏል፡፡ ይህ በሂዯት ጠቀሜታው የታወቀው
+        ሰብሌ ከ152 አመታት በኋላ እ.ኤ.አ. በ2010 በማዕከሊዊ እስታትስቲክስ ባሇስሌጣን የተካሄዯው ዓመታዊ የግብርና
+        ምርት ቅኝት ዘገባ 164, 000 ሄክታር (ሄ/ር) መሬትን በመሸፇን 940,209 ቶንስ ምርት የተሰበሰበበት ዯረጃ ሊይ
+        ዯርሷሌ፡፡ ይሌቁንም ዯግሞ ባሇፈት 20 አመታት የዴንች ቆዲ ሽፊን 64% እዴገትን አሳይቷሌ፡፡</p>
+    </div>
+
+    <h5>By: Simegn </h5>
+    <P>July 11, 2024, 10:32:03 AM</P>
+  </div>
+
+  <div class="col-md-4 mt-1">
+
+    <img src="assets/announcement/City Administrator2024-01-01_11-12-43_am.png" alt="" width="100%" height="250rem">
+    <h2>የስራ ቅጥር ስለማሳወቅ ይመለከታል</h2>
+    <div class="content">
+      <p>Position:1: Recruit professional- IT (For Fresh Graduate)
+         ✅ Experience:- 0 year ✅ Professional : Bachelor’s Degree in Computer Science, 
+         Information Technology, Computer engineering, Computer Information systems, 
+         software engineering or Accounting, Economics, Business Administration, Management, 
+        Banking, Finance or other related fields. 
+        📌Deadline: August 20, 2024</p>
+    </div>
+
+    <h5>By: Administrator</h5>
+    <P>July 9, 2024, 10:32:03 AM</P>
+  </div>
+
+  </div>
+
+  <div style="justify-content: center;display: flex;">
+    <a><pagination-controls id="announcement" (pageChange)="announcementPage = $event"></pagination-controls></a>
+  </div>
+
+</section>
+<app-footer></app-footer>

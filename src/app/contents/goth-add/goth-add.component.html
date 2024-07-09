@@ -1,0 +1,40 @@
+
+<section class="content container-fluid">
+    <mat-card>
+        <mat-card-content class="top-card">
+            <button mat-raised-button>Add Form </button>
+            <button mat-raised-button [routerLink]="['/dash/goths']">List </button>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+<form [formGroup]="departmentForm">
+    <div class="card-body">
+    <div class="form-group">
+        <mat-form-field appearance="fill">
+            <mat-label for="exampleInputEmail1">Goth(ጎጥ) Name</mat-label>
+            <input  matInput  placeholder="enter goth name" formControlName="gothName">
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+<mat-hint>Hint</mat-hint> -->
+        </mat-form-field>
+    
+              <mat-form-field>
+            <mat-label>Kebele</mat-label>
+            <mat-select matInput formControlName="kebeleName" id="">
+                <mat-option *ngFor="let kebele of kebeles" value="{{kebele.kebeleName}}">{{kebele.kebeleName}}</mat-option> 
+                
+            </mat-select>
+        </mat-form-field>
+    </div>
+       
+    <div class="form-group">
+        <label>description</label>
+        <textarea class="form-control" rows="3" placeholder="Enter description" formControlName="description"></textarea>
+        </div>
+    </div>
+    <div class="card-footer">
+    <button type="submit" *ngIf="!update"class="btn btn-primary" (click)="addDepartment()">Submit</button>
+    <button type="submit" *ngIf="update" class="btn btn-primary" (click)="updateDept()">Update</button>
+    </div>
+    </form>
+</mat-card>
+</section>

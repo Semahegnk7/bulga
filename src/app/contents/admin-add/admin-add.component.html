@@ -1,0 +1,161 @@
+<section class="content container-fluid">
+    <mat-card>
+        <mat-card-content class="top-card">
+            <button mat-raised-button>Add Form </button>
+            <button mat-raised-button [routerLink]="['/dash/admins']">List </button>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-horizontal-stepper animationDuration="1000" [linear]="false">
+            <form [formGroup]="registrationForm">
+                <mat-step label="Basic Information">
+                    <mat-card-content formGroupName="basicInformation">
+                        <div class="form-row">
+                            <mat-form-field appearance="fill">
+                                <mat-label>First Name</mat-label>
+                                <input matInput placeholder="enter first name" formControlName="firstName">
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Middle Name</mat-label>
+                                <input matInput placeholder="enter middleName" formControlName="middleName">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Last Name</mat-label>
+                                <input matInput placeholder="enter last name" formControlName="lastName">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Email</mat-label>
+                                <input matInput placeholder="enter email" formControlName="userName">
+                                <div
+                                *ngIf="registrationForm.get('basicInformation.userName').hasError('pattern') && registrationForm.get('basicInformation.userName').touched">
+                                Please enter a valid email address.
+                            </div>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                                <mat-label>Phone</mat-label>
+                                <input type="tel" matInput placeholder="enter phone" formControlName="phone">
+                                <div
+                                    *ngIf="registrationForm.get('basicInformation.phone').hasError('pattern') && registrationForm.get('basicInformation.phone').touched">
+                                    Please enter a valid phone number.
+                                </div>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Department</mat-label>
+                                <mat-select matInput formControlName="department" id="">
+                                    <mat-option value="Information System">IS</mat-option>
+                                    <mat-option value="IS">System</mat-option>
+                                    <mat-option value="Woreda">Database Admin</mat-option>
+                                    <mat-option value="Zonal officer">Other</mat-option>
+                                    
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Education Level</mat-label>
+                                <mat-select formControlName="educationalLevel">
+                                    <mat-option value="Diploma">Diploma</mat-option>
+                                    <mat-option value="Degree">Degree</mat-option>
+                                    <mat-option value="Masters">Masters</mat-option>
+                                    <mat-option value="Other">Other</mat-option>
+                                </mat-select>
+                                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint> -->
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Employee Status</mat-label>
+                                <mat-select formControlName="employeeStatus">
+                                    <mat-option value="Full-Time">Full-Time</mat-option>
+                                    <mat-option value="Part-Time">Part-Time</mat-option>
+                                    <mat-option value="Contract">Contract</mat-option>
+                                </mat-select>
+                                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint> -->
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Position</mat-label>
+                                <mat-select formControlName="position">
+                                    <mat-option value="Manager">Manager</mat-option>
+                                    <mat-option value="Senior">Senior</mat-option>
+                                    <mat-option value="Junior">Junior</mat-option>                                    
+                                    <mat-option value="Below">Below</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                        </div>
+                    </mat-card-content>
+
+                    <button mat-raised-button color="primary" matStepperNext>Next</button>
+                </mat-step>
+
+                <mat-step label="Additional Information">
+                    <mat-card-content formGroupName="additionalInformation">
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Experience</mat-label>
+                            <input type="number" matInput placeholder="enter experience" formControlName="experience">
+                            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+              <mat-hint>Hint</mat-hint> -->
+                        </mat-form-field>
+                        
+                        <mat-form-field appearance="fill">
+                            <mat-label>Date of Birth</mat-label>
+                            <input matInput [matDatepicker]="pickerBirth" placeholder="enter dob" formControlName="dateOfBirth">
+                          <mat-datepicker-toggle
+                            matIconSuffix [for]="pickerBirth">
+                          </mat-datepicker-toggle>
+                          <mat-datepicker #pickerBirth>
+
+                          </mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Address</mat-label>
+                            <input matInput placeholder="enter address" formControlName="address">
+                            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+              <mat-hint>Hint</mat-hint> -->
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Employement Date</mat-label>
+                            <input matInput [matDatepicker]="pickerEmp" placeholder="enter hire date" formControlName="hireDate">
+                            <mat-datepicker-toggle
+                              matIconSuffix [for]="pickerEmp">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #pickerEmp>
+  
+                            </mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Termination Date</mat-label>
+                            <input matInput [matDatepicker]="picker"placeholder="termination date" formControlName="terminationDate">
+                            <mat-datepicker-toggle
+                              matIconSuffix [for]="picker">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #picker>
+  
+                            </mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" *ngIf="!update">
+                            <mat-label>Password</mat-label>
+                            <input matInput placeholder="enter password" formControlName="password">
+                            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+              <mat-hint>Hint</mat-hint> -->
+                        </mat-form-field>
+                        <span class="gender">
+                            <mat-label><strong>Gender:</strong></mat-label>
+                              <mat-radio-group formControlName="gender" matInput>
+                                  <mat-radio-button value="Male">Male</mat-radio-button>
+                                  <mat-radio-button value="Female">Female</mat-radio-button>
+                              </mat-radio-group>
+                          </span>
+                    </mat-card-content>
+
+                    <button mat-raised-button color="primary" matStepperPrevious>Back</button> |
+                    <button mat-raised-button color="primary" *ngIf="!update"(click)="submitAdmin()">Submit</button>
+                    <button mat-raised-button color="primary" *ngIf="update" (click)="updateInfo()">Update</button>
+                </mat-step>
+               
+            </form>
+        </mat-horizontal-stepper>
+    </mat-card>
+
+
+</section>

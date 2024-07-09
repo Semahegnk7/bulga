@@ -1,0 +1,379 @@
+<section class="content container-fluid">
+  <mat-card>
+    <mat-card-content class="top-card">
+      <button mat-raised-button>Trained Seekers</button>
+      <button mat-raised-button>New </button>
+    </mat-card-content>
+  </mat-card>
+  <div class="row">
+    <div class="col-md-3">
+      <mat-card>
+        <mat-card-content>
+          <button mat-raised-button (click)="openPDF()">Pdf </button>
+          <button mat-raised-button (click)="exportExcel()">Excel </button>
+          <button mat-raised-button (click)="printData('print')">Print </button>
+      </mat-card-content>
+      </mat-card>
+    </div>
+      <div class="col-md-2" >
+        <mat-form-field appearance="fill">
+            <mat-label>Select Column</mat-label>
+            <mat-select (valueChange)="applyFilters($event)">
+            <mat-radio-button value="" selected disabled="true">Select Criteria</mat-radio-button>
+                <mat-option value="gender">Gender</mat-option>
+                <mat-option value="educationalLevel">Educational Level</mat-option>
+                <mat-option value="kebeleName">Kebele</mat-option>
+                <mat-option value="isDisabled" title="true">Disabled</mat-option>
+                <mat-option value="houseWife"title="true">House wife</mat-option>
+                <mat-option value="returnFromArab"title="true">Return From Arab</mat-option>
+                <mat-option title="Entrepreneur or Skilled" value="trainingType">trainingType</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+      <div class="col-md-4">
+        <mat-form-field style="width: 100%;">
+            <mat-label>Filter</mat-label>
+            <input matInput [disabled]="!columnName" placeholder="Search" (keyup)="applyFilterByColumn($event)">
+        </mat-form-field>
+    </div>
+   
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <mat-form-field style="width: 100%;">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Search" (keyup)="applyFilter($event)">
+    </mat-form-field>
+    </div>
+    <div class="col-md-2">
+      <mat-form-field appearance="fill">
+        <mat-label>Select Column</mat-label>
+        <mat-select (valueChange)="setColumnName($event)">
+        <mat-radio-button value="" selected disabled="true">Select By range</mat-radio-button>
+            <mat-option value="dateOfBirth">Age</mat-option>
+            <mat-option value="graduatedDate">graduated Date</mat-option>
+            <mat-option value="trainedEndDate">Trained Date</mat-option>
+        </mat-select>
+    </mat-form-field>
+    </div>
+    <div class="col-md-2">
+      <mat-form-field style="width: 100%;">
+        <mat-label>From</mat-label>
+        <input matInput [disabled]="!columnRangeName" placeholder="Search" (keyup)="setFromValue($event)">
+    </mat-form-field>
+    </div>
+    <div class="col-md-2">
+      <mat-form-field style="width: 100%;">
+        <mat-label>To</mat-label>
+        <input matInput [disabled]="!columnRangeName" placeholder="Search" (keyup)="setToValue($event)">
+    </mat-form-field>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary" style="padding:5px 10px;margin-top:10px;" (click)="filterByRange()">Apply</button>
+    </div>
+  </div>
+  <div class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+        <mat-cell style="cursor: pointer;" *matCellDef="let element;let i=index" title="View Detail"
+          data-bs-toggle="modal" data-bs-target="#detailModal" (click)="viewDetail(element.id)">{{i+1}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Phone </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="middleName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Middle Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.middleName}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="userName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> userName </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.userName}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="trainingType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Training Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.trainingType }}  </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="graduatedDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> graduated Date </mat-header-cell>
+        <mat-cell *matCellDef="let element"title="yyyy-MM-dd"> {{element.graduatedDate}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="trainedEndDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Trained Date </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.trainedEndDate}} </mat-cell>
+    </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-button *ngIf="userRole==='WOREDA_COORDINATOR'" color="accent" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="setId(element.id)"><span class="material-icons">arrow_back</span></button>|
+         <button (click)="setEditId(element.id)" mat-button color="primary"><mat-icon>edit</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10, 50, 100]" aria-label="Select page" showFirstLastButtons>
+    </mat-paginator>
+    <table class="table table-hover" style="width: 30%;">
+      <thead>
+        <tr>
+          <th>Male</th>
+          <th>Female</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{totalMale}}</td>
+          <td>{{totalFemale}}</td>
+          <td>{{grandTotal}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div  style="display: none;" id="print">
+      <div id="jobSeekerTable">
+    
+        <table mat-table [dataSource]="dataExport" matSort  style="width: 100%;">
+          <caption style="caption-side:top;width: 100%;" *ngIf="!filterValue && !filterRange">The Trained Job Seeker Information in The Bulga City Administration </caption>
+          <caption style="caption-side:top" *ngIf="filterValue &&!filterRange">The Trained Job Seeker Information in The Bulga City Administration  Filter By {{columnName}}  {{filterValue}}</caption>
+          <caption style="caption-side:top" *ngIf="!filterValue &&filterRange">The Trained Job Seeker Information in The Bulga City Administration  Filter By <span> {{columnRangeName === 'dateOfBirth' ? 'Age' : columnRangeName}} </span> from {{fromValue}} to {{toValue}}</caption>
+          
+          <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+              <mat-cell style="cursor: pointer;" *matCellDef="let element;let i=index"title="View Detail" data-bs-toggle="modal" data-bs-target="#detailModal" (click)="viewDetail(element.id)">{{i+1}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="fullName">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Full Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.firstName}} {{element.middleName}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="gender">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.gender}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="trainedEndDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Trained Date </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.trainedEndDate}} </mat-cell>
+      </ng-container>
+          
+          <ng-container matColumnDef="userName">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> userName </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.userName}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="phone">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Phone </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="age">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Date of Birth </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.dateOfBirth }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="graduatedDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> graduated Date </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.graduatedDate }} </mat-cell>
+      </ng-container>
+          <ng-container matColumnDef="kebele">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Kebele </mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.kebeleName}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="educationalLevel">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Educational Level </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.educationalLevel}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="houseWife">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> House Wife </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.houseWife}} </mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="TrainedFor">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Trained For </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.trainedAt}} </mat-cell>
+    </ng-container>
+      <ng-container matColumnDef="trainedStartDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Trained From </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.trainedDate}} </mat-cell>
+    </ng-container>
+      <ng-container matColumnDef="returnFromArab">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Return From Arab </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.returnFromArab}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="trainingType">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Training Type </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.trainingType }}  </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="isDisabled">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> isDisabled </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.isDisabled}} </mat-cell>
+  </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumnExport"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnExport;"></mat-row>
+      </table>
+      <table >
+        <th style="padding: 15px;border-bottom: 1px solid grey;" colspan="4">Male</th>
+        <th style="padding: 15px;border-bottom: 1px solid grey;"  colspan="4">Female</th>
+        <th style="padding: 15px;border-bottom: 1px solid grey;"  colspan="3">Total</th>
+        <tr></tr>
+       <td style="padding: 15px;border-bottom: 1px solid grey;" colspan="4">{{totalMale}}</td>
+       <td style="padding: 15px;border-bottom: 1px solid grey;" colspan="4">{{totalFemale}}</td>
+       <td style="padding: 15px;border-bottom: 1px solid grey;" colspan="3">{{grandTotal}}</td>
+      </table>
+      </div>
+    </div>
+  </div>
+  
+</section>
+<div class="modal fade mt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fa fa-exclamation-triangle" style="font-size: 40px; color: red;"></i>
+          <h4 class="mt-2">Confirmation!</h4>
+          <p class="mt-3">Are You Sure?</p>
+          <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" (click)="BackTrainedToSeeker()" data-bs-dismiss="modal">Continue</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="detailModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Job Seeker Details</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" *ngIf="jobSeeker">
+        <div class="row mt-3">
+          <div class="col-md">
+            first Name: {{jobSeeker.firstName}}
+          </div>
+          <div class="col-md">
+            Middle Name: {{jobSeeker.middleName}}
+          </div>
+          <div class="col-md">
+            Last Name: {{jobSeeker.lastName}}
+          </div>
+
+        </div>
+        <div class="row mt-3">
+          <div class="col-md">
+            Gender: {{jobSeeker.gender}}
+          </div>
+          <div class="col-md">
+            Age: {{jobSeeker.dateOfBirth}}
+          </div>
+          <div class="col-md">
+            Educational Level: {{jobSeeker.educationalLevel}}
+          </div>
+
+        </div>
+        <div class="row mt-3">
+          <div class="col-md">
+            Graduated Date : {{jobSeeker.graduatedDate}}
+          </div>
+          <div class="col-md">
+            Graduated Institution: {{jobSeeker.graduatedAt}}
+          </div>
+          <div class="col-md">
+            Kebele: {{jobSeeker.kebeleName}}
+          </div>
+
+        </div>
+        <div class="row mt-3">
+          <div class="col-md">
+            Goth: {{jobSeeker.gothName}}
+          </div>
+          <div class="col-md">
+            Phone: {{jobSeeker.phone}}
+          </div>
+          <div class="col-md">
+            Status: {{jobSeeker.employeeStatus}}
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md">
+            <div class="col-md">
+              Trained factory: {{jobSeeker.trainedAt}}
+            </div>
+
+          </div>
+          <div class="col-md">
+            Trained start Date: {{jobSeeker.trainedDate}}
+          </div>
+          <div class="col-md">
+            Trained End Date: {{jobSeeker.trainedEndDate}}
+          </div>
+        </div>
+        <div class="row mt-3" *ngIf="true">
+          <div class="col-md">
+            Skill Covered: {{jobSeeker.skillCovered}}
+          </div>
+          <div class="col-md">
+            <mat-slide-toggle (change)="onSlideToggleChange($event)">Hired!</mat-slide-toggle>
+          </div>
+        </div>
+        <form [formGroup]="updateStatusForm">
+          <div class="row mt-3" *ngIf="isChecked">
+            <div class="col-md">
+              <mat-form-field appearance="fill" class="skill">
+                <mat-label>Hired Factory:</mat-label>
+                <input matInput placeholder="hired factory" formControlName="employedAt">
+              </mat-form-field>
+            </div>
+            <div class="col-md">
+              
+                <mat-label>Employment Type:</mat-label>
+                <mat-radio-group matInput placeholder="employment type" formControlName="employmentType" (change)="changeValidator($event)">
+                  <mat-radio-button value="Permanent">Permanent</mat-radio-button>
+                  <mat-radio-button value="Contract">Contract</mat-radio-button>
+                </mat-radio-group>
+              
+            </div>
+                    
+                     <div class="row">
+                      <div class="col-md">
+                        <mat-form-field appearance="fill" class="skill">
+                          <mat-label>employment Date:</mat-label>
+                          <input type="date" matInput placeholder="enter date" formControlName="employedDate">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md">
+                        <mat-form-field appearance="fill" class="skill">
+                          <mat-label>Termination Date:</mat-label>
+                          <input type="date" matInput placeholder="enter date" formControlName="terminationDate">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md">
+                        <button mat-raised-button color="primary" (click)="saveUpdateStatus()">Submit</button>
+                      </div>
+                     </div>
+                    </div>
+                    
+                     
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn-close">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
