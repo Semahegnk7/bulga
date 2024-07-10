@@ -48,13 +48,12 @@ export class ContactComponent implements OnInit {
   submit() {
     console.log(this.contactForm.value)
     if (this.contactForm.valid) {
-      this.service.createContactUs(this.contactForm.value).subscribe((response) => {
-        this.openSnackBar("Your Inqury is Successfull Submitted Thank you!!!");
-        this.contactForm.reset();
-      }, (error) => {
-        this.openSnackBar("Something Went Wrong on the Backend")
-      })
-    }
+      
+        this.openSnackBar("Your Inquiry is Successful Submitted Thank you!!!");
+
+        console.log(this.contactForm.value);
+      
+        }
 
     else {
       this.openSnackBar("Please fill the required Forms")
