@@ -52,7 +52,7 @@ export class ContactComponent implements OnInit {
         this.openSnackBar("Your Inquiry is Successful Submitted Thank you!!!");
 
         console.log(this.contactForm.value);
-      
+      this.contactForm.reset();
         }
 
     else {
